@@ -1,5 +1,5 @@
 <script>
-let inputUserName = "Soer145a"    
+let inputUserName = "MichellaKing"    
 let inputPassword = "Sbx98hfg!"    
 let authenticated;
 let promise = "";
@@ -21,7 +21,6 @@ function validateInput(pass,usr){
 function sendDataToNode(){
     promise = doPost().then((data)=>{return data});
     console.log(promise);
-    
 }
 async function doPost () {
 		const res = await fetch('http://localhost:8080/verify-login', {
