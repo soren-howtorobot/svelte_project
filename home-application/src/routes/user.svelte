@@ -1,11 +1,11 @@
 <script>
-let inputUserName = "MichellaKing"    
+let inputUserName = "MieMichella"    
 let inputPassword = "Sbx98hfg!"    
 let authenticated;
 let promise = "";
 $:{
     authenticated = validateInput(inputPassword,inputUserName);
-    console.log(authenticated);
+    //console.log(authenticated);
 }
 
 function validateInput(pass,usr){
@@ -20,10 +20,10 @@ function validateInput(pass,usr){
 }
 function sendDataToNode(){
     promise = doPost().then((data)=>{return data});
-    console.log(promise);
+    //console.log(promise);
 }
 async function doPost () {
-		const res = await fetch('http://localhost:8080/verify-login', {
+		const res = await fetch('http://localhost:8080/user/verify-login', {
 			method: "POST",
             headers: {'Content-Type': 'application/json'}, 
             body: JSON.stringify({
