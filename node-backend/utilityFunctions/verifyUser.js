@@ -13,18 +13,14 @@ con.connect((err) => {
 const isindb = (username, password, callBack) => {
   let un = mysql.escape(username).trim();
   let pw = mysql.escape(password).trim();
-  let sql = `SELECT * FROM users WHERE user_name = ${un} AND user_password = ${pw}`;
-  console.log(un,pw);
   con.query(
-    sql,
-    
+    `SELECT * FROM users WHERE user_name = ${un} AND user_password = ${pw}`,
     function (err, result) {
       if (err) throw err;
-      console.log(result);
+      //console.log(result);
       return callBack(result);
     }
   );
-  
   return callBack;
 };
 

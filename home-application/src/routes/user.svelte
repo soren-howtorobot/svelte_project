@@ -3,6 +3,7 @@ let inputUserName = "MieMichella"
 let inputPassword = "Sbx98hfg!"    
 let authenticated;
 let promise = "";
+let sendRequest = 0;
 $:{
     authenticated = validateInput(inputPassword,inputUserName);
     //console.log(authenticated);
@@ -14,13 +15,17 @@ function validateInput(pass,usr){
     if(usrPattern.test(usr) && passPattern.test(pass)){
         return true;
     } else{
-        return false
+        return true
     }
     
 }
 function sendDataToNode(){
-    promise = doPost().then((data)=>{return data});
-    //console.log(promise);
+    sendRequest = 0;
+    promise = doPost().then((data)=>{
+        sendRequest = 1;
+        return data
+    });
+    
 }
 async function doPost () {
 		const res = await fetch('http://localhost:8080/user/verify-login', {
@@ -32,6 +37,7 @@ async function doPost () {
             })
         });
         const data = await res.json();
+        //console.log(data);
 
 		if (res.ok) {
             console.log(data);
@@ -58,12 +64,18 @@ async function doPost () {
         
     </form>
 </div>
+{#if sendRequest}
+     <!-- content here -->
+
 {#await promise}
 	<p>...waiting</p>	
+{:then x}
+	<p>{x.message}</p>
 {:catch error}
-    <p>Hey, those input does not match requirements!</p>
+    
     {#each error as err}
         <p style="color:red">ERROR - {err.value} - {err.msg}</p>
     {/each}
 	
 {/await}
+{/if}
