@@ -12,6 +12,7 @@ app.get("/getUser", (req, res) => {
   let returnData = "Hello World!";
   res.send(returnData);
 });
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

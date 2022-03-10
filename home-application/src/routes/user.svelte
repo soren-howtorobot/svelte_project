@@ -6,7 +6,6 @@ let promise = "";
 let sendRequest = 0;
 $:{
     authenticated = validateInput(inputPassword,inputUserName);
-    //console.log(authenticated);
 }
 
 function validateInput(pass,usr){
@@ -25,6 +24,7 @@ function sendDataToNode(){
         sendRequest = 1;
         return data
     });
+
     
 }
 async function doPost () {
@@ -37,7 +37,6 @@ async function doPost () {
             })
         });
         const data = await res.json();
-        //console.log(data);
 
 		if (res.ok) {
             console.log(data);
@@ -65,17 +64,15 @@ async function doPost () {
     </form>
 </div>
 {#if sendRequest}
-     <!-- content here -->
-
-{#await promise}
-	<p>...waiting</p>	
-{:then x}
-	<p>{x.message}</p>
-{:catch error}
-    
-    {#each error as err}
-        <p style="color:red">ERROR - {err.value} - {err.msg}</p>
-    {/each}
-	
-{/await}
+    {#await promise}
+        <p>...waiting</p>	
+    {:then x}
+        <p>{x.message}</p>
+    {:catch error}
+        
+        {#each error as err}
+            <p style="color:red">ERROR - {err.value} - {err.msg}</p>
+        {/each}
+        
+    {/await}
 {/if}
