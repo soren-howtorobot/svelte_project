@@ -1,13 +1,18 @@
 <script>
     import { pokemonStoreWriteable, getGen } from "../stores/pokemonStore.js";
     import Card from "../structure/monData/card.svelte";
+    import { teamStoreWriteable } from '../stores/teamStore.js';
+    const addToTeam = (monID) => {
+        $teamStoreWriteable = [...$teamStoreWriteable,monID];
+    }
     let searchWord = '';
     let selectedGen = '';
     let filtered = [];
     $:selectedGen != '' ? getGen(selectedGen) : getGen(1);
     $:{
+        console.log($teamStoreWriteable);
         if (searchWord != '') {
-            filtered = $pokemonStoreWriteable.filter(mon=> mon.name.includes(searchWord.toLowerCase()));
+            filtered = $pokemonStoreWriteable.filter( mon => mon.name.includes(searchWord.toLowerCase()));
         }else{
             filtered = [ ... $pokemonStoreWriteable];
         }
@@ -31,6 +36,6 @@
         </label>
     </div>
     {#each filtered as mon}
-         <Card mon={mon}/>
+         <Card add={addToTeam} mon={mon}/>
     {/each}
 </div>

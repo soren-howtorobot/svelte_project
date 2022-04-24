@@ -1,13 +1,43 @@
 <script>
-    export let mon;
-    
+	export let mon;
+    export let add;
+    let rotated = 0;
 </script>
-
-<a href="pokemons/{mon.id}">
-    <div 
-    class=" relative group hover:bg-blue-300 transition cursor-pointer h-36 flex flex-col bg-slate-700 m-2 p-4 rounded-sm items-center justify-center"
->
-             <h2 class = " group-hover:text-black absolute top-2">#{mon.id}: <span class=" capitalize">{mon.name}</span></h2>
-             <img class = " w-32 object-cover" src="{mon.img}" alt="{mon.name}">
+<div class="wrapper relative h-36 m-2 p-4 ">
+    <div on:click={()=>{rotated = !rotated}} class:rotated class=" shadow-2xl z-20 absolute top-0 left-0 group hover:bg-blue-300 w-full h-full transition cursor-pointer flex flex-col bg-slate-300  rounded-sm items-center border-black border-2 justify-center">
+        <h2 class=" group-hover:text-black">	
+            #{mon.id}: <span class=" capitalize">{mon.name}</span>
+        </h2>
+        <img class="w-32 object-cover" src={mon.img} alt={mon.name} />
+    </div>
+    <div class="secondLayer absolute top-0 z-10 bg-slate-300 rounded-sm w-1/2 grid grid-rows-2 grid-cols-1 justify-center items-center justify-items-center right-0 h-full">
+        <a href="/pokemons/{mon.id}" class=" w-4/5 h-4/5 flex justify-center items-center">
+            <div class="box w-full h-full flex justify-center items-center">
+                <i class="fas fa-book-open"></i>
+            </div>
+        </a>
+        <div on:click={add(mon.id)} class="box w-4/5 h-4/5 flex justify-center items-center">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
 </div>
-</a>
+<style>
+    .rotated{
+        transform: translateX(-50%);
+    }
+    .box{
+        border: solid 2px black;
+        border-radius: 8px;
+        box-sizing: border-box;
+        color: rgb(19, 80, 100);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .box i{
+        font-size: 1.5em;
+    }
+    .box:hover{
+        color: rgb(64, 64, 248);
+    }
+
+</style>
