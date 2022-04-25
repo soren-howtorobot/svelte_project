@@ -1,16 +1,14 @@
 <script>
     import { pokemonStoreWriteable, getGen } from "../stores/pokemonStore.js";
-    import Card from "../structure/monData/card.svelte";
     import { teamStoreWriteable } from '../stores/teamStore.js';
-    const addToTeam = (monID) => {
-        $teamStoreWriteable = [...$teamStoreWriteable,monID];
-    }
+    import Card from "../structure/pokemon-compontents/card.svelte";
+    import TeamViewer from '../structure/pokemon-compontents/teamViewer.svelte';
+    const addToTeam = (monID) => { $teamStoreWriteable = [...$teamStoreWriteable,monID]; }
     let searchWord = '';
     let selectedGen = '';
     let filtered = [];
     $:selectedGen != '' ? getGen(selectedGen) : getGen(1);
     $:{
-        console.log($teamStoreWriteable);
         if (searchWord != '') {
             filtered = $pokemonStoreWriteable.filter( mon => mon.name.includes(searchWord.toLowerCase()));
         }else{
@@ -23,6 +21,7 @@
 <svelte:head>
     <title>Pokédex</title>
 </svelte:head>
+<TeamViewer/>
 <div class=" w-4/5 grid  sm:grid-cols-2 lg:grid-cols-4  md:grid-cols-3 m-auto" >
     <div class="searchField m-2 col-span-4 ">
         <select class=" text-black p-2 rounded w-52 my-4" bind:value={selectedGen}>

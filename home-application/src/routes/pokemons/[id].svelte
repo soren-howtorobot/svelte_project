@@ -12,7 +12,7 @@
 </script>
 <script>
     export let data;
-    import Stat from "../../structure/monData/statBlock.svelte";
+    import Stat from "../../structure/pokemon-compontents/statBlock.svelte";
 </script>
 <h1 class=" text-center text-4xl capitalize">{data.name}</h1>
 
