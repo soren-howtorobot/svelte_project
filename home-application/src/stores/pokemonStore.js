@@ -1,8 +1,23 @@
+import { data } from "autoprefixer";
 import { writable } from "svelte/store";
 
 export const pokemonStoreWriteable = writable([]);
 
-const fetchMons = async (limit,offset) => {
+
+export const fetchMons = async(gen) =>{
+	const conn = await fetch(`http://localhost:8080/pokemons/get-mons/${gen}`);
+	const data = await conn.json();
+	
+	const arr = data.map(e => {
+		return {
+			name: e.name,
+			id: e.id,
+			img: `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${e.name}.png`
+		};
+	})
+	pokemonStoreWriteable.set(arr);
+}
+/* const fetchMons = async (limit,offset,gen) => {
     const conn = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
     const data = await conn.json();
     const loadedPokemon = data.results.map((data, index) => {
@@ -17,33 +32,43 @@ const fetchMons = async (limit,offset) => {
 				img: `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${name}.png`
 			};
 		});
-   pokemonStoreWriteable.set(loadedPokemon);
+		stashMons(loadedPokemon,gen)
+   pokemonStoreWriteable.set(loadedPokemon,gen);
 }
 export const getGen = (gen) => {
 	switch (gen) {
 		case 1:
-			fetchMons(151, 0);
+			fetchMons(151, 0,gen);
 			break;
 		case 2:
-			fetchMons(100, 151);
+			fetchMons(100, 151, gen);
 			break;
 		case 3:
-			fetchMons(135,251)
+			fetchMons(135, 251, gen);
 			break;
 		case 4:
-			fetchMons(108,386)
+			fetchMons(108, 386, gen);
 			break;
 		case 5:
-			fetchMons(155,494)
+			fetchMons(155, 494, gen);
 			break;
 		case 6:
-			fetchMons(72,649)
+			fetchMons(72, 649, gen);
 			break;
 		case 7:
-			fetchMons(88,721)
+			fetchMons(88, 721, gen);
 			break;
 		case 8:
-			fetchMons(89,809)
+			fetchMons(89, 809, gen);
 			break;
 	}
 }
+const stashMons = async (monData, gen) => {
+	const conn = await fetch('http://localhost:8080/pokemons/stashMons', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ monData, gen })
+	});
+	const data = await conn.json();
+	console.log(data);
+};  */

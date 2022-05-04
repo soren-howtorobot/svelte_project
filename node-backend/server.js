@@ -14,15 +14,8 @@ app.use(cors());
 const user = require("./routes/user");
 app.use('/user',user);
 
-
-
-app.post("/getUser", (req, res) => {
-  let returnData = false;
-  if(req.body.data == 'Node'){
-    returnData = true;
-  }
-  res.send({response: returnData});
-});
+const mons = require("./routes/pokemons");
+app.use("/pokemons", mons);
 
 
 app.listen(port, () => {

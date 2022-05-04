@@ -1,14 +1,27 @@
 <script>
-    import { pokemonStoreWriteable, getGen } from "../stores/pokemonStore.js";
+    import { pokemonStoreWriteable,fetchMons } from "../stores/pokemonStore.js";
     import { teamStoreWriteable } from '../stores/teamStore.js';
     import Card from "../structure/pokemon-compontents/card.svelte";
     import TeamViewer from '../structure/pokemon-compontents/teamViewer.svelte';
-    const addToTeam = (monID) => { $teamStoreWriteable = [...$teamStoreWriteable,monID]; }
+    
+    export const addToTeam = (monID) => { 
+        if($teamStoreWriteable.length == 6){
+            alert('You can only have 6 pokemon in your team!');
+            return
+        }
+        if($teamStoreWriteable.includes(monID)){
+            alert('Only one of each pokemon!');
+            return
+        }
+        $teamStoreWriteable = [...$teamStoreWriteable,monID];
+    }
+
     let searchWord = '';
     let selectedGen = '';
     let filtered = [];
-    $:selectedGen != '' ? getGen(selectedGen) : getGen(1);
+    $:selectedGen != '' ? fetchMons(selectedGen) : fetchMons(1);
     $:{
+        
         if (searchWord != '') {
             filtered = $pokemonStoreWriteable.filter( mon => mon.name.includes(searchWord.toLowerCase()));
         }else{
@@ -30,7 +43,7 @@
                  <option value="{i+1}"> Generation {i+1}</option>
             {/each}
         </select>
-        <label for="filterMons"><p>Wanna find a specific pokemon? Search here!</p>
+        <label for="filterMons"><p>Want to find a specific pokemon? Search here!</p>
             <input bind:value="{searchWord}" class=" text-black p-2 rounded w-52 mb-4" type="text" name="filterMons" id="filterMons" placeholder="Golurk">
         </label>
     </div>
