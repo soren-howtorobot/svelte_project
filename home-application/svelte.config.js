@@ -5,6 +5,9 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		target: '#svelte',
+		files: {
+			lib: 'src/lib',
+		}
 	}
 };
 

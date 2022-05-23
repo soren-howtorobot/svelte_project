@@ -1,20 +1,9 @@
 <script>
     import { pokemonStoreWriteable,fetchMons } from "../stores/pokemonStore.js";
-    import { teamStoreWriteable } from '../stores/teamStore.js';
     import Card from "../structure/pokemon-compontents/card.svelte";
     import TeamViewer from '../structure/pokemon-compontents/teamViewer.svelte';
+    import TeamSelector from "../structure/pokemon-compontents/team-selector.svelte";
     
-    export const addToTeam = (monID) => { 
-        if($teamStoreWriteable.length == 6){
-            alert('You can only have 6 pokemon in your team!');
-            return
-        }
-        if($teamStoreWriteable.includes(monID)){
-            alert('Only one of each pokemon!');
-            return
-        }
-        $teamStoreWriteable = [...$teamStoreWriteable,monID];
-    }
 
     let searchWord = '';
     let selectedGen = '';
@@ -28,13 +17,17 @@
             filtered = [ ... $pokemonStoreWriteable];
         }
     }
-    
 
+    const rotateAll = () =>{
+        if(!document.querySelector('.firstLayer.rotated')) return
+        document.querySelector('.firstLayer.rotated').classList.remove('rotated');
+    }
 </script>
 <svelte:head>
     <title>Pokédex</title>
 </svelte:head>
 <TeamViewer/>
+<TeamSelector />
 <div class=" w-4/5 grid  sm:grid-cols-2 lg:grid-cols-4  md:grid-cols-3 m-auto" >
     <div class="searchField m-2 col-span-4 ">
         <select class=" text-black p-2 rounded w-52 my-4" bind:value={selectedGen}>
@@ -48,6 +41,6 @@
         </label>
     </div>
     {#each filtered as mon}
-         <Card add={addToTeam} mon={mon}/>
+         <Card {rotateAll} {mon} />
     {/each}
 </div>

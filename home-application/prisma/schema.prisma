@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id            Int    @id @default(autoincrement())
+  user_name     String @unique @db.VarChar(50)
+  user_password String @db.VarChar(100)
+  user_fName    String @db.VarChar(50)
+  user_lName    String @db.VarChar(50)
+  teams         Team[]
+}
+
+model Team {
+  id         Int       @id @default(autoincrement())
+  team_name  String    @db.VarChar(50)
+  trainer_id Int
+  user_id    Users     @relation(fields: [trainer_id], references: [id])
+  pokemons   Pokemon[]
+
+  @@index([trainer_id], map: "Team_trainer_id_fkey")
+}
+
+model Pokemon {
+  id         Int    @id @unique
+  name       String @db.VarChar(100)
+  generation Int?
+  teams      Team[]
+}
