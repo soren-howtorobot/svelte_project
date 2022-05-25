@@ -22,12 +22,17 @@
         if(!document.querySelector('.firstLayer.rotated')) return
         document.querySelector('.firstLayer.rotated').classList.remove('rotated');
     }
+    let monFromCard = "";
+    const selectedMon = (event) =>{
+        monFromCard = event.detail.mon;
+    }
+
 </script>
 <svelte:head>
     <title>Pokédex</title>
 </svelte:head>
-<TeamViewer/>
-<TeamSelector />
+<TeamViewer />
+<TeamSelector {monFromCard} />
 <div class=" w-4/5 grid  sm:grid-cols-2 lg:grid-cols-4  md:grid-cols-3 m-auto" >
     <div class="searchField m-2 col-span-4 ">
         <select class=" text-black p-2 rounded w-52 my-4" bind:value={selectedGen}>
@@ -41,6 +46,6 @@
         </label>
     </div>
     {#each filtered as mon}
-         <Card {rotateAll} {mon} />
+         <Card on:selectedMon={selectedMon} {rotateAll} {mon} />
     {/each}
 </div>

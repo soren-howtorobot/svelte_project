@@ -1,27 +1,22 @@
 <script>
+
+    import { createEventDispatcher } from 'svelte';
+    const dispatch = createEventDispatcher();
 	export let mon;
     export let rotateAll;
     import { popStore } from '../../stores/popstore.js';
     import { teamStoreWriteable } from '../../stores/teamStore.js';
-    import {createTeam} from '$lib/createObjInstance/team.js';
+    import { createTeam } from '$lib/createObjInstance/team.js';
     let rotated;
     const addToTeam = (mon) => {
         if(!$teamStoreWriteable.length){
             const teamToAdd = createTeam();
             teamToAdd.pokemons.push(mon);
             $teamStoreWriteable = [...$teamStoreWriteable, teamToAdd];
-        }
-       /* console.log($popStore);
-        popStore.update( e => e = !e); */
-        /* if($teamStoreWriteable[0].pokemons.length == 6){
-            alert('You can only have 6 pokemon in your team!');
             return
         }
-        if($teamStoreWriteable[0].pokemons.includes(mon)){
-            alert('Only one of each pokemon!');
-            return
-        } */
-        //$teamStoreWriteable[0].pokemons = [...$teamStoreWriteable[0].pokemons,mon];
+        dispatch('selectedMon', { mon });
+        popStore.update( e => e = !e);
         
     }
     
