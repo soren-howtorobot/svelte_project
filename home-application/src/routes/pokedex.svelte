@@ -1,10 +1,11 @@
 <script>
-    export let mons;
-    $:console.log(mons)
-	import { pokemonStoreWriteable, fetchMons } from '../../../stores/pokemonStore.js';
-	import Card from '../../../../structure/pokemon-compontents/card.svelte';
-	import TeamViewer from '../../../../structure/pokemon-compontents/teamViewer.svelte';
-	import TeamSelector from '../../../../structure/pokemon-compontents/team-selector.svelte';
+    /* export let mons;
+    $:console.log(mons) */
+	import { pokemonStoreWriteable, fetchMons } from '../stores/pokemonStore.js';
+	/* import Card from ' ../../../structure/pokemon-compontents/card.svelte'; */
+	import Card from "../structure/pokemon-compontents/card.svelte"
+	import TeamViewer from '../structure/pokemon-compontents/teamViewer.svelte';
+	import TeamSelector from '../structure/pokemon-compontents/team-selector.svelte';
 
 	let searchWord = '';
 	let selectedGen = '';
