@@ -23,7 +23,7 @@
     
 </script>
 <div class="wrapper relative h-36 m-2 p-4 ">
-    <div on:click={()=>{rotateAll();rotated = !rotated}} class:rotated class=" firstLayer shadow-2xl z-20 absolute top-0 left-0 group hover:bg-blue-300 w-full h-full transition cursor-pointer flex flex-col bg-slate-300  rounded-sm items-center border-black border-2 justify-center">
+    <div on:click={()=>{rotateAll();rotated = !rotated}} class:rotated class=" firstLayer shadow-2xl z-20 absolute top-0 left-0 group hover:bg-blue-300 w-full h-full transition ease-in-out cursor-pointer flex flex-col bg-slate-300  rounded-sm items-center border-black border-2 justify-center">
         <h2 class=" group-hover:text-black">	
             #{mon.id}: <span class=" capitalize">{mon.name}</span>
         </h2>

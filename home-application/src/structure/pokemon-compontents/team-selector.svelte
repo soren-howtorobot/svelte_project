@@ -1,6 +1,7 @@
 <script>
     import { popStore } from "../../stores/popstore.js";
     import { teamStoreWriteable } from "../../stores/teamStore.js";
+    import {createTeam} from '$lib/createObjInstance/team.js'
     export let monFromCard;
     let multipleInserts = false;
     const addToTeam = (i) => {
@@ -17,6 +18,9 @@
     const storeUpdate = () => {
         popStore.update(e => e = !e);
     }
+    const addTeam = () => {
+		$teamStoreWriteable = [...$teamStoreWriteable, createTeam()];
+	}
     $:console.log(multipleInserts);
 </script>
     {#if $popStore}
@@ -27,13 +31,17 @@
                 <div class="teamcontainer">
                     <div class="introArea">
                         <div class="checkforMultiple">
-                            <p class="text-center mt-4 flex items-center justify-center">Want to add your pokemon to more teams? <input class="ml-2" type="checkbox" bind:checked="{multipleInserts}" name="" id=""></p>
+                            <p class="text-center mt-4 flex items-center justify-center">Want to add your pokemon to more teams? <input class="ml-2" type="checkbox" bind:checked="{multipleInserts}"></p>
+                            <p class=" text-center mt-4">Add Additional Team: <i on:click={()=>{addTeam()}} class="fas fa-plus"></i></p>
                         </div>
                     </div>
                     <div class=" overflow-y-scroll max-h-60">
                         {#each $teamStoreWriteable as team,i}
                         <div class="teamWrapper flex row items-center  m-5 border border-black ">
-                            <div on:click={()=>{addToTeam(i)}} class="addToTeamBtn h-16 w-10 flex items-center justify-center border border-black mx-4 hover:bg-green-100 transition cursor-pointer rounded">
+                            <div on:click={()=>{
+                                if(team.pokemons.includes(monFromCard)) return
+                                addToTeam(i);
+                            }} class:disabled={team.pokemons.includes(monFromCard)} class=" addToTeamBtn h-16 w-10 flex items-center justify-center border border-black mx-4 hover:bg-green-100 transition cursor-pointer rounded">
                                 <i class="fas fa-plus"></i>
                             </div>
                             <div class="teamContainerWrapper">
@@ -72,5 +80,9 @@
        width: 600px;
        height: 400px;
        background-color: white;
+   }
+   .disabled{
+       pointer-events: none;
+       background-color: lightslategray;
    }
 </style>

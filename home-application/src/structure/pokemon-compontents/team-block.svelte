@@ -4,7 +4,7 @@
     export let team;
     export let updateTeam;
     let editReady = false;
-    let newTeamName = "";
+    let newTeamName = "";  
     
 </script>
 
