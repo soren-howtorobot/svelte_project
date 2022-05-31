@@ -21,7 +21,6 @@
     const addTeam = () => {
 		$teamStoreWriteable = [...$teamStoreWriteable, createTeam()];
 	}
-    $:console.log(multipleInserts);
 </script>
     {#if $popStore}
         <div class="wrapper">
