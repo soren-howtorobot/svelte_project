@@ -2,14 +2,21 @@
     import { popStore } from "../../stores/popstore.js";
     import { teamStoreWriteable } from "../../stores/teamStore.js";
     import {createTeam} from '$lib/createObjInstance/team.js'
+    import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
     export let monFromCard;
+    const ejectEvent = () => {
+		dispatch('updateNotice', { });
+	}
     let multipleInserts = false;
     const addToTeam = (i) => {
         
         if(monFromCard == ""){
             return alert('How did you open this with no pokemon?');
         }
+        
         $teamStoreWriteable[i].pokemons = [...$teamStoreWriteable[i].pokemons,monFromCard];
+        ejectEvent();
         if(!multipleInserts){
             storeUpdate();
             return

@@ -12,7 +12,7 @@
 </script>
 <script>
     export let data;
-    import Stat from "../../structure/pokemon-compontents/statBlock.svelte";
+    
 </script>
 <h1 class=" text-center text-4xl capitalize">{data.name}</h1>
 
@@ -43,9 +43,7 @@
         </div>
     </div>
     <div class="stats">
-        {#each data.stats as stat,index}
-            <Stat timer={index} statBlob={stat}/>
-        {/each}
+        
     </div>
     </div>
     <div class="imageArea">

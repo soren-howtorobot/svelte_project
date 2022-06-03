@@ -13,9 +13,7 @@ export async function get({ params }) {
 		};
 	}
 
-	/* return {
-    status: 404
-  }; */
+	
 	return {
 		status: 200,
 		body: {

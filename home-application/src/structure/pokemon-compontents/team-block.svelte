@@ -8,11 +8,18 @@
     
 </script>
 
-<div class="teamWrapper-container">
+<div class="teamWrapper-container p-4 bg-slate-100 rounded ">
     {#if !editReady}
-    <p class=" text-center mb-2">Team Name: <br><span>{team.teamName}</span><i on:click={()=>{editReady = !editReady}} class=" ml-2 fas fa-pencil-alt"></i></p>
+        <p class=" mb-2">Team Name: <br><span>{team.teamName}</span><i on:click={()=>{editReady = !editReady}} class=" ml-2 cursor-pointer hover:text-green-300 transition fas fa-pencil-alt"></i></p>
     {:else}
+    <form on:submit={
+        (e)=>{
+            e.preventDefault();
+            updateTeam(i,newTeamName);editReady = !editReady
+        }
+    } action="">
         <input bind:value={newTeamName} type="text"> <i on:click={()=>{updateTeam(i,newTeamName);editReady = !editReady}} class="fas fa-check"></i>
+    </form>
     {/if}
     <div class="teamnWrapper-mons grid grid-cols-2 gap-5">
         {#each team.pokemons as mon}
