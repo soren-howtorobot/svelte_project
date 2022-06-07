@@ -19,30 +19,30 @@
 	const ejectEvent = () => {
 		dispatch('updateNotice', { variable: !newMonAdded });
 	}
-	let extended = true;
+	let extended = false;
 </script>
 
 {#if $teamStoreWriteable.length != 0}
 
 	<div class:extended class="teamViewer p-5 transition fixed top-1/4 right-4 bg-slate-300  border-2 rounded border-black border-solid">
 		<div on:click={()=>{extended=!extended; ejectEvent()}} class="teamViewerLabel cursor-pointer rounded-l bg-slate-300 absolute group -left-10 w-10 border-t-2 border-b-2 border-l-2 border-r-0 border-black border-solid flex py-2 items-center justify-center ">
-			<i class:newMonAdded class=" text-xl group-hover:-translate-x-1 transition fas fa-arrow-circle-left"></i>
+			<i class:newMonAdded class=" label text-xl group-hover:-translate-x-1 transition fas fa-arrow-circle-left"></i>
 		</div>
-		<p class=" text-lg">Current teams:</p>
+		<p class=" text-lg mb-4">Current teams:</p>
 		
-		<div class="teamWrapper ">
+		<div class="teamWrapper h-60 overflow-x-scroll ">
 			{#each $teamStoreWriteable as team,i}
 				<TeamBlock {team} {i} {removeFromTeam} {updateTeam}/>
 			{/each}
 		</div>
-		<div class="addTeam">
-			<p>Add another team <i on:click = {addTeam} class=" cursor-pointer fas fa-plus"></i></p>
+		<div class="addTeam w-fit mt-4">
+			<p class=" cursor-pointer transition group" on:click = {addTeam} >Add another team <i  class=" transition group-hover:rotate-90 group-hover:text-green-300 cursor-pointer fas fa-plus"></i></p>
 		</div>
 	</div>
 {/if}
 <style>
 	
-	.extended div i{
+	.extended div i.label{
 		transform: rotate(180deg);
 	}
 	.teamViewer{

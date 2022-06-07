@@ -4,19 +4,26 @@ export const pokemonStoreWriteable = writable([]);
 
 export const fetchMons = async(gen) =>{
 	const conn = await fetch(
-		`http://127.0.0.1:3000/endpoints/${gen}`
+		`http://127.0.0.1:3000/endpoints/allMons`
 	);
 	const preData = await conn.json();
-	const data = preData.pokemon_gen;
-	 const arr = data.map(e => {
+	const arr = preData.returnData.map(e => {
 		return {
-			name: e.name,
-			id: e.id,
-			img: `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${e.name}.png`
-		};
-	})
-	pokemonStoreWriteable.set(arr); 
+			generation: e[0].generation,
+			pokemons: e.map(x => {
+				return {
+					name: x.name,
+					id: x.id,
+					img: `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${x.name}.png`
+				};
+			})
+		}
+	});
+	
+	pokemonStoreWriteable.set(arr);
 }
+
+fetchMons()
 /* const fetchMons = async (limit,offset,gen) => {
     const conn = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
     const data = await conn.json();

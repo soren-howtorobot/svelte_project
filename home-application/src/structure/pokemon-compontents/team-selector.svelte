@@ -14,7 +14,7 @@
         if(monFromCard == ""){
             return alert('How did you open this with no pokemon?');
         }
-        
+        if($teamStoreWriteable[i].pokemons.length ==  6) return
         $teamStoreWriteable[i].pokemons = [...$teamStoreWriteable[i].pokemons,monFromCard];
         ejectEvent();
         if(!multipleInserts){
@@ -41,13 +41,13 @@
                             <p class=" text-center mt-4">Add Additional Team: <i on:click={()=>{addTeam()}} class="fas fa-plus"></i></p>
                         </div>
                     </div>
-                    <div class=" overflow-y-scroll max-h-60">
+                    <div class=" overflow-y-scroll max-h-80">
                         {#each $teamStoreWriteable as team,i}
                         <div class="teamWrapper flex row items-center  m-5 border border-black ">
                             <div on:click={()=>{
-                                if(team.pokemons.includes(monFromCard)) return
+                                if(team.pokemons.includes(monFromCard) || team.pokemons.length == 6) return
                                 addToTeam(i);
-                            }} class:disabled={team.pokemons.includes(monFromCard)} class=" addToTeamBtn h-16 w-10 flex items-center justify-center border border-black mx-4 hover:bg-green-100 transition cursor-pointer rounded">
+                            }} class:disabled={team.pokemons.includes(monFromCard) || team.pokemons.length == 6} class=" addToTeamBtn h-16 w-10 flex items-center justify-center border border-black mx-4 hover:bg-green-100 transition cursor-pointer rounded">
                                 <i class="fas fa-plus"></i>
                             </div>
                             <div class="teamContainerWrapper">
