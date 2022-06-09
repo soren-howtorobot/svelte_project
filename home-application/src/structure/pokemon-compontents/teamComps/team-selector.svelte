@@ -1,6 +1,6 @@
 <script>
-    import { popStore } from "../../stores/popstore.js";
-    import { teamStoreWriteable } from "../../stores/teamStore.js";
+    import { popStore } from "../../../stores/popstore.js";
+    import { teamStoreWriteable } from "../../../stores/teamStore.js";
     import {createTeam} from '$lib/createObjInstance/team.js'
     import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();

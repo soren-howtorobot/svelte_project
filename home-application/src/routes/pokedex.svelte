@@ -1,8 +1,9 @@
 <script>
 	import { pokemonStoreWriteable } from '../stores/pokemonStore.js';
 	import Card from "../structure/pokemon-compontents/card.svelte"
-	import TeamViewer from '../structure/pokemon-compontents/teamViewer.svelte';
-	import TeamSelector from '../structure/pokemon-compontents/team-selector.svelte';
+	import TeamViewer from '../structure/pokemon-compontents/teamComps/teamViewer.svelte';
+	import TeamSelector from '../structure/pokemon-compontents/teamComps/team-selector.svelte';
+	import SearchField from '../structure/pokemon-compontents/search.svelte';
 	
 	const rotateAll = () => {
 		if (!document.querySelector('.firstLayer.rotated')) return;
@@ -21,12 +22,13 @@
 <svelte:head>
 	<title>Pokédex</title>
 </svelte:head>
+<SearchField />
 <TeamViewer on:updateNotice={flipMon} {newMonAdded} />
 <TeamSelector on:updateNotice={()=>{newMonAdded = true}} {monFromCard} />
 <div class="mainWrapper">
 	<div class="monArea">
 		{#each $pokemonStoreWriteable as gen}
-			<div class="genWrapper my-12">
+			<div id="GEN_{gen.generation}" class="genWrapper my-12">
 				<h2 class=" text-xl mb-2">Generation {gen.generation}</h2>
 				<div class="pokemonArea grid gap-4 grid-cols-5">
 					{#each gen.pokemons as mon}	

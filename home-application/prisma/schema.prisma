@@ -1,5 +1,7 @@
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+
 }
 
 datasource db {
@@ -31,4 +33,5 @@ model Pokemon {
   name       String @db.VarChar(100)
   generation Int?
   teams      Team[]
+  @@fulltext([name])
 }

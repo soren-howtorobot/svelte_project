@@ -2,7 +2,7 @@ import { writable } from "svelte/store";
 export const pokemonStoreWriteable = writable([]);
 
 
-export const fetchMons = async(gen) =>{
+export const fetchMons = async() =>{
 	const conn = await fetch(
 		`http://127.0.0.1:3000/endpoints/allMons`
 	);
