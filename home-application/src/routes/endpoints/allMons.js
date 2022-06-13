@@ -43,18 +43,8 @@ export async function get() {
 		})
 	];
 	
-
-	if (returnData) {
-		return {
-			body: { returnData }
-		};
-	}
-
-	
 	return {
-		status: 200,
-		body: {
-			message: 'Hi mom!'
-		}
+		body: { returnData }
 	};
+	
 }

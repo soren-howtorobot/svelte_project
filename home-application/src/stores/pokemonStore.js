@@ -9,6 +9,7 @@ export const fetchMons = async() =>{
 	const preData = await conn.json();
 	const arr = preData.returnData.map(e => {
 		return {
+			search:false,
 			generation: e[0].generation,
 			pokemons: e.map(x => {
 				return {

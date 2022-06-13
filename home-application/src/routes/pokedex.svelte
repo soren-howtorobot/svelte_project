@@ -29,11 +29,18 @@
 	<div class="monArea">
 		{#each $pokemonStoreWriteable as gen}
 			<div id="GEN_{gen.generation}" class="genWrapper my-12">
-				<h2 class=" text-xl mb-2">Generation {gen.generation}</h2>
+				<h2 class=" text-xl mb-2">{#if !gen.search}
+					Generation:
+				{/if}{gen.generation}</h2>
 				<div class="pokemonArea grid gap-4 grid-cols-5">
-					{#each gen.pokemons as mon}	
-						<Card on:noticeNew={()=>{newMonAdded = true}} on:selectedMon={selectedMon} {rotateAll} {mon} />
-					{/each}
+					
+						{#each gen.pokemons as mon}	
+							<Card on:noticeNew={()=>{newMonAdded = true}} on:selectedMon={selectedMon} {rotateAll} {mon} />
+						{:else}
+								<p class="col-span-5">No pokemons found</p>
+						{/each}
+					
+					
 				</div>
 			</div>
 		{/each}
