@@ -1,32 +1,46 @@
+
 <script>
-let inputUserName = ""    
-let inputPassword = ""    
-let authenticated = false;
-$:{
-    authenticated = validateInput(inputPassword,inputUserName);
-}
-function validateInput(pass,usr){
-    let usrPattern = /^[a-z0-9]{8,20}$/i;
-    let passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_])[A-Za-z\d$@$!%*?&_]{8,30}$/
-    if(usrPattern.test(usr) && passPattern.test(pass)){
-        return true;
-    } else{
-        return false
+	
+    let inputUserName = "Soer145a"    
+    let inputPassword = "Sbx98hfg!"    
+    let validated = false;
+    $: validated = validateInput(inputPassword,inputUserName);
+    
+    const validateInput = (pass,usr) => {
+        let usrPattern = /^[a-z0-9]{8,20}$/i;
+        let passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_])[A-Za-z\d$@$!%*?&_]{8,30}$/
+        if(usrPattern.test(usr) && passPattern.test(pass)){
+            return true;
+        } else{
+            return false
+        }
     }
-}
+    const sendToLoginEP = async() => {
+        console.log('hi');
+        const conn = await fetch('/endpoints/login', {
+            method: 'POST',
+            body: JSON.stringify({ inputUserName,inputPassword })
+	    });
+        const data = await conn.json();
+
+        console.log(data);
+        //did it works?
+
+
+    }
 
 </script>
 
 <div class="login">
-    <form class=" flex flex-col gap-4 " action="" on:submit|preventDefault>
+    <form class=" flex flex-col gap-4 " on:submit|preventDefault={validated ? sendToLoginEP:''}>
         <label for=""> <p>Username: </p>
             <input bind:value={inputUserName} name="username" autocomplete="off" class="px-2 pb-0 focus:outline-none text-black border-b-slate-400 border-b-2 border-b-solid" placeholder="..." type="text">
         </label>
-        <label for=""> <p>Password:</p>
+        <label for=""> <p>Password: </p>
             <input bind:value={inputPassword} name="password" class=" px-2 pb-0 focus:outline-none text-black border-b-slate-400 border-b-2 border-b-solid" placeholder="..."type="password">
         </label>
-        {#if authenticated}
-            <input class=" transition-all cursor-pointer w-16 h-10 border-slate-200 hover:border-indigo-300 border-solid border-2" type="submit" value="Login"><!-- content here -->
+        {#if validated}
+            <input class=" transition-all cursor-pointer w-16 h-10 border-slate-200 hover:border-indigo-300 border-solid border-2"  type="submit" value="Login">
         {/if}
     </form>
 </div>
