@@ -1,5 +1,9 @@
 <script>
-  
+import { goto } from '$app/navigation';
+
+    import { session } from '$app/stores'
+   
+    console.log($session);
 </script>
 
 <div class=" mx-auto w-4/5 flex justify-center items-center flex-col">
@@ -9,7 +13,16 @@
             <a href="/">Home</a>
             <a href="/pokedex">Pokedex</a>
             <a href="/faq">FAQ</a>
-            <a href="/user">Login / logout</a>
+            {#if Object.keys($session).length !== 0}
+                 <a href="/dashboard"> Your dashboard</a>
+                 <a href="/logout" on:click|preventDefault= {async()=>{
+                    await fetch('/logout');
+                    window.location = '/'
+                 }}>Logout</a>
+            {:else}
+                <a href="/user">Login</a>
+            {/if}
+            
         </ul>
     </nav>
 </div>

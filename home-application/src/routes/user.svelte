@@ -1,6 +1,16 @@
-
+<script context="module">
+    
+    export const load = ({ session }) => {
+        if(Object.keys(session).length !== 0){
+            return{
+                status:302,
+                redirect:'/dashboard'
+            }
+        }
+        return {}   
+    }
+</script>
 <script>
-	
     let inputUserName = "Soer145a"    
     let inputPassword = "Sbx98hfg!"    
     let validated = false;
@@ -16,16 +26,15 @@
         }
     }
     const sendToLoginEP = async() => {
-        console.log('hi');
         const conn = await fetch('/endpoints/login', {
             method: 'POST',
             body: JSON.stringify({ inputUserName,inputPassword })
 	    });
         const data = await conn.json();
-
         console.log(data);
-        //did it works?
-
+        if (data.searchStatus) {
+            window.location = "/dashboard";
+        }
 
     }
 
@@ -43,4 +52,7 @@
             <input class=" transition-all cursor-pointer w-16 h-10 border-slate-200 hover:border-indigo-300 border-solid border-2"  type="submit" value="Login">
         {/if}
     </form>
+</div>
+<div class="register">
+    
 </div>
