@@ -1,9 +1,5 @@
 <script>
-import { goto } from '$app/navigation';
-
     import { session } from '$app/stores'
-   
-    console.log($session);
 </script>
 
 <div class=" mx-auto w-4/5 flex justify-center items-center flex-col">

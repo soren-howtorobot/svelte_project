@@ -1,16 +1,35 @@
 <script>
+	import { session } from '$app/stores';
+    console.log($session);
     export let removeFromTeam;
     export let i;
     export let team;
     export let updateTeam;
     let editReady = false;
     let newTeamName = team.teamName;  
+    let loading = false;
+
+
+    const saveTeam = async() => {
+        const conn = await fetch('/endpoints/saveTeam',{
+            method:'POST',
+            body:JSON.stringify({
+                team,
+                id:$session.payload.user_id,
+            })
+        });
+        const returnData = await conn.json();
+        console.log(returnData);
+    }
     
 </script>
 
-<div class="teamWrapper-container p-4 mb-4 bg-slate-100 rounded ">
+<div class="teamWrapper-container relative p-4 mb-4 bg-slate-100 rounded ">
     {#if !editReady}
         <p on:click={()=>{editReady = !editReady}} class=" cursor-pointer group mb-2">Team Name: <span class=" font-extrabold text-black">{team.teamName}</span><i class=" group-hover:text-green-300 ml-2 transition fas fa-pencil-alt"></i></p>
+        {#if $session?.payload}
+            <i on:click={saveTeam} class=" absolute right-4 top-4 text-2xl cursor-pointer hover:text-green-300 transition hover:scale-110 fas fa-save"></i>
+        {/if}
     {:else}
     <form on:submit={
         (e)=>{

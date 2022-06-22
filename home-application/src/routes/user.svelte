@@ -7,12 +7,12 @@
                 redirect:'/dashboard'
             }
         }
-        return {}   
+        return {}
     }
 </script>
 <script>
-    let inputUserName = "Soer145a"    
-    let inputPassword = "Sbx98hfg!"    
+    let inputUserName = ""    
+    let inputPassword = ""    
     let validated = false;
     $: validated = validateInput(inputPassword,inputUserName);
     

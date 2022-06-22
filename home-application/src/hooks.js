@@ -8,7 +8,7 @@ export const handle = async({event,resolve}) => {
     }
     const userdata = await prisma.users.findFirst({
         where:{
-            id:cookie.id
+            id:parseInt(cookies.myCookie)
         }
     });
     if(userdata){

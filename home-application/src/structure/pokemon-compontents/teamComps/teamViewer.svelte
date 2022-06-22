@@ -19,6 +19,7 @@
 	const ejectEvent = () => {
 		dispatch('updateNotice', { variable: !newMonAdded });
 	}
+	
 	let extended = false;
 </script>
 
