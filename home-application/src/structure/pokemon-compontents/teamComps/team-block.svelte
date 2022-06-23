@@ -11,7 +11,7 @@
 
 
     const saveTeam = async() => {
-        const conn = await fetch('/endpoints/saveTeam',{
+        const conn = await fetch('/apis/teams/saveTeam',{
             method:'POST',
             body:JSON.stringify({
                 team,
@@ -19,7 +19,8 @@
             })
         });
         const returnData = await conn.json();
-        console.log(returnData);
+        //todo: add feedback to users
+        
     }
     
 </script>

@@ -26,7 +26,7 @@
         }
     }
     const sendToLoginEP = async() => {
-        const conn = await fetch('/endpoints/login', {
+        const conn = await fetch('/apis/login', {
             method: 'POST',
             body: JSON.stringify({ inputUserName,inputPassword })
 	    });

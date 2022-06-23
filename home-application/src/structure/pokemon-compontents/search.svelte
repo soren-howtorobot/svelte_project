@@ -7,7 +7,7 @@
             fetchMons()
             return
         }
-        const conn = await fetch('/endpoints/searchMon', {
+        const conn = await fetch('/apis/searchMon', {
             method: 'POST',
             body: JSON.stringify({ searchString })
 	    });

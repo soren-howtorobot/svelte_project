@@ -1,5 +1,5 @@
 <script>
-	import { pokemonStoreWriteable } from '../stores/pokemonStore.js';
+	import { pokemonStoreWriteable, fetchMons } from '../stores/pokemonStore.js';
 	import Card from "../structure/pokemon-compontents/card.svelte"
 	import TeamViewer from '../structure/pokemon-compontents/teamComps/teamViewer.svelte';
 	import TeamSelector from '../structure/pokemon-compontents/teamComps/team-selector.svelte';

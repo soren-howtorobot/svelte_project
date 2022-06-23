@@ -3,9 +3,7 @@ export const pokemonStoreWriteable = writable([]);
 
 
 export const fetchMons = async() =>{
-	const conn = await fetch(
-		`http://127.0.0.1:3000/endpoints/allMons`
-	);
+	const conn = await fetch('http://localhost:3000/apis/allMons');
 	const preData = await conn.json();
 	const arr = preData.returnData.map(e => {
 		return {
@@ -24,7 +22,7 @@ export const fetchMons = async() =>{
 	pokemonStoreWriteable.set(arr);
 }
 
-fetchMons()
+fetchMons();
 /* const fetchMons = async (limit,offset,gen) => {
     const conn = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
     const data = await conn.json();
