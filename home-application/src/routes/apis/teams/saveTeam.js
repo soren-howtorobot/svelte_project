@@ -2,7 +2,7 @@ import {prisma} from '$lib/db';
 
 export async function post( {request} ){
     const request_data = await request.json();
-    console.log(request_data);
+    
     const createdTeam = await prisma.users.update({
         where:{
             id: parseInt(request_data.id)
