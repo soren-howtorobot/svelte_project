@@ -1,5 +1,4 @@
 import { prisma } from '$lib/db'
-import * as cookie from 'cookie';
 export async function post( {request} ){
     const request_data = await request.json();
     const userTeams = await prisma.team.findMany({

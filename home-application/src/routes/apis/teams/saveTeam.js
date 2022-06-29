@@ -20,7 +20,7 @@ export async function post( {request} ){
             }
         }
     });
-    console.log(createdTeam);
+    
     return{
         status:200,
         body:{

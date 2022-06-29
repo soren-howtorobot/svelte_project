@@ -1,20 +1,39 @@
 <script>
 	import { teamStoreWriteable } from '/src/stores/teamStore.js';
+	import { session } from '$app/stores';
 	import { createEventDispatcher } from 'svelte';
 	import {createTeam} from '$lib/createObjInstance/team.js'
 	import TeamBlock from './team-block.svelte';
 	const dispatch = createEventDispatcher();
 
 	export let newMonAdded;
-	export const removeFromTeam = (mon,i) => {
-		const dataArr = $teamStoreWriteable[i].pokemons.filter((e) => e.id != mon.id);
-		$teamStoreWriteable[i].pokemons = dataArr;
-	};
 	export const addTeam = () => {
 		$teamStoreWriteable = [...$teamStoreWriteable, createTeam()];
 	}
-	export const updateTeam = (index,newName) => {
+	const updateTeam = (index,newName) => {
 		$teamStoreWriteable[index].teamName = newName;
+    }
+	const removeFromTeam = (mon,i) => {
+		const dataArr = $teamStoreWriteable[i].pokemons.filter((e) => e.id != mon.id);
+		
+		if(!dataArr.length){
+			$teamStoreWriteable = $teamStoreWriteable.filter( (team,index) => index != i );
+			return
+		}
+		$teamStoreWriteable[i].pokemons = dataArr;
+
+	};
+	const saveTeam = async() => {
+        const conn = await fetch('/apis/teams/saveTeam',{
+            method:'POST',
+            body:JSON.stringify({
+                team,
+                id:$session.payload.user_id,
+            })
+        });
+        const returnData = await conn.json();
+        //todo: add feedback to users
+        
     }
 	const ejectEvent = () => {
 		dispatch('updateNotice', { variable: !newMonAdded });
@@ -31,9 +50,14 @@
 		</div>
 		<p class=" text-lg mb-4">Current teams:</p>
 		
-		<div class="teamWrapper h-60 overflow-x-scroll ">
+		<div class="teamWrapper h-60 overflow-y-scroll overflow-x-hidden ">
 			{#each $teamStoreWriteable as team,i}
-				<TeamBlock {team} {i} {removeFromTeam} {updateTeam}/>
+				<TeamBlock 
+				{saveTeam} 
+				{removeFromTeam}
+				{updateTeam}
+				{team}
+				{i} />
 			{/each}
 		</div>
 		<div class="addTeam w-fit mt-4">

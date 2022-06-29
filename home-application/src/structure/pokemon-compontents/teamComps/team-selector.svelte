@@ -1,7 +1,7 @@
 <script>
     import { popStore } from "../../../stores/popstore.js";
     import { teamStoreWriteable } from "../../../stores/teamStore.js";
-    import {createTeam} from '$lib/createObjInstance/team.js'
+    import { createTeam } from '$lib/createObjInstance/team.js'
     import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
     export let monFromCard;
@@ -51,7 +51,7 @@
                                 <i class="fas fa-plus"></i>
                             </div>
                             <div class="teamContainerWrapper">
-                                <p>{team.teamName}</p>
+                                <p>{team.team_name}</p>
                                 <div class="mons grid-cols-3">
                                     {#each team.pokemons as mon}
                                         <div class="monWrapper">
