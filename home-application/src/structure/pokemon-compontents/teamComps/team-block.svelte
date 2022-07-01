@@ -5,11 +5,11 @@
     export let i;
     export let team;
     export let removeFromTeam;
-    export let updateTeam; 
+    export let updateTeamName; 
     export let saveTeam
+    export let deleteTeam = '';
     let editReady = false;
     let newTeamName = team.teamName;  
-    let loading = false;
     
    
 
@@ -22,13 +22,16 @@
     {#if !editReady}
         <p on:click={()=>{editReady = !editReady}} class=" cursor-pointer group mb-2">Team Name: <span class=" font-extrabold text-black">{team.team_name}</span><i class=" group-hover:text-green-300 ml-2 transition fas fa-pencil-alt"></i></p>
         {#if $session?.payload}
-            <i on:click={saveTeam} class=" absolute right-4 top-4 text-2xl cursor-pointer hover:text-green-300 transition hover:scale-110 fas fa-save"></i>
+            <i on:click={saveTeam(team)} class=" absolute right-4 top-4 text-2xl cursor-pointer hover:text-green-300 transition hover:scale-110 fas fa-save"></i>
+            {#if deleteTeam}
+                <i on:click={deleteTeam(team)} class=" hover:text-black text-2xl transition cursor-pointer absolute rounded right-4 top-12 text-red-600 fas fa-times" />
+            {/if}
         {/if}
     {:else}
     <form on:submit={
         (e)=>{
             e.preventDefault();
-            updateTeam(i,newTeamName);
+            updateTeamName(i,newTeamName);
             editReady = !editReady;
         }
     }>

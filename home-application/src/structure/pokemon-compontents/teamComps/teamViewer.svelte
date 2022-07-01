@@ -23,7 +23,7 @@
 		$teamStoreWriteable[i].pokemons = dataArr;
 
 	};
-	const saveTeam = async() => {
+	const saveTeam = async(team) => {
         const conn = await fetch('/apis/teams/saveTeam',{
             method:'POST',
             body:JSON.stringify({

@@ -10,7 +10,7 @@ export async function post( {request} ){
         data:{
             teams:{
                 create:{
-                    team_name: request_data.team.teamName,
+                    team_name: request_data.team.team_name,
                     pokemons: {
                         connect:request_data.team.pokemons.map(e => {return {id:e.id}}),
                     },
