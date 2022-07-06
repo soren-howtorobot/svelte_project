@@ -11,11 +11,6 @@
     let editReady = false;
     let newTeamName = team.teamName;  
     
-   
-
-
-    
-    
 </script>
 
 <div class="teamWrapper-container relative p-4 mb-4 bg-slate-100 rounded ">
@@ -35,10 +30,11 @@
             editReady = !editReady;
         }
     }>
-        <input bind:value={newTeamName} class="newName mb-2 border-b focus:outline-none border-black bg-slate-100" type="text"> <i on:click={()=>{updateTeam(i,newTeamName);editReady = !editReady}} class="fas fa-check"></i>
+        <input bind:value={newTeamName} class="newName mb-2 border-b focus:outline-none border-black bg-slate-100" type="text">
+         <i on:click={()=>{updateTeamName(i,newTeamName);editReady = !editReady}} class=" fas fa-check"></i>
     </form>
     {/if}
-    <div class="teamWrapper-mons mx-auto flex flex-wrap w-3/4 place-items-end over-x-scroll bg-slate-500">
+    <div class="teamWrapper-mons mx-auto grid grid-cols-3 w-80 place-items-end over-x-scroll bg-slate-500">
         {#each team.pokemons as mon}
             <div class="monWrapper w-16 m-2 rounded h-16 flex items-center justify-center relative bg-slate-200 ">
                 <i

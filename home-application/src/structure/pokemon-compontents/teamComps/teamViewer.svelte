@@ -10,8 +10,8 @@
 	export const addTeam = () => {
 		$teamStoreWriteable = [...$teamStoreWriteable, createTeam()];
 	}
-	const updateTeam = (index,newName) => {
-		$teamStoreWriteable[index].teamName = newName;
+	const updateTeamName = (index,newName) => {
+		$teamStoreWriteable[index].team_name = newName;
     }
 	const removeFromTeam = (mon,i) => {
 		const dataArr = $teamStoreWriteable[i].pokemons.filter((e) => e.id != mon.id);
@@ -55,7 +55,7 @@
 				<TeamBlock 
 				{saveTeam} 
 				{removeFromTeam}
-				{updateTeam}
+				{updateTeamName}
 				{team}
 				{i} />
 			{/each}

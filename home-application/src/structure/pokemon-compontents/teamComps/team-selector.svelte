@@ -34,14 +34,14 @@
             <div on:click={()=>{storeUpdate()}} class="background bg-black h-full cursor-pointer w-full absolute flex justify-center items-center opacity-50"></div>
             <div class="modal-content rounded-lg">
                 <h1 class=" relative text-center text-2xl mt-4 pb-4 border-b border-slate-900">Which team to add to? <i on:click={()=>{storeUpdate()}} class=" cursor-pointer absolute right-5 hover:text-red-600 transition fas fa-times-circle"></i></h1>
-                <div class="teamcontainer">
+                <div class="teamcontainer overflow-hidden">
                     <div class="introArea">
                         <div class="checkforMultiple">
                             <p class="text-center mt-4 flex items-center justify-center">Want to add your pokemon to more teams? <input class="ml-2" type="checkbox" bind:checked="{multipleInserts}"></p>
-                            <p class=" text-center mt-4">Add Additional Team: <i on:click={()=>{addTeam()}} class="fas fa-plus"></i></p>
+                            <p class="text-center mt-4">Add Additional Team: <i on:click={()=>{addTeam()}} class="fas fa-plus"></i></p>
                         </div>
                     </div>
-                    <div class=" overflow-y-scroll max-h-80">
+                    <div class=" overflow-y-scroll h-60">
                         {#each $teamStoreWriteable as team,i}
                         <div class="teamWrapper flex row items-center  m-5 border border-black ">
                             <div on:click={()=>{
@@ -52,7 +52,7 @@
                             </div>
                             <div class="teamContainerWrapper">
                                 <p>{team.team_name}</p>
-                                <div class="mons grid-cols-3">
+                                <div class="mons grid grid-cols-3">
                                     {#each team.pokemons as mon}
                                         <div class="monWrapper">
                                             <img src={mon.img} alt={mon.name}>

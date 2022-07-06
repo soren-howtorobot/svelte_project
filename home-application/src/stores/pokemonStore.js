@@ -3,7 +3,7 @@ export const pokemonStoreWriteable = writable([]);
 
 
 export const fetchMons = async() =>{
-	const conn = await fetch('http://localhost:3000/apis/allMons');
+	const conn = await fetch('http://localhost:3000/apis/pokemons/allMons');
 	const preData = await conn.json();
 	const arr = preData.returnData.map(e => {
 		return {

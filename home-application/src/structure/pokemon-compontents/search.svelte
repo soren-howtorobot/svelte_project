@@ -7,7 +7,7 @@
             fetchMons()
             return
         }
-        const conn = await fetch('/apis/searchMon', {
+        const conn = await fetch('/apis/pokemons/searchMon', {
             method: 'POST',
             body: JSON.stringify({ searchString })
 	    });
