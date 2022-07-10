@@ -1,5 +1,21 @@
 import { prisma } from '$lib/db'
 
 export async function post({request}){
-    
+    const request_data = await request.json();
+    console.log(request_data);
+    const isUnique = await prisma.users.findUnique({
+        where:{
+            user_name:request_data.user_name
+        }
+    });
+    let exists = false;
+    if (isUnique) {
+        exists = true;
+    }
+    return{
+        status:200,
+        body:{
+            exists
+        }
+    }
 }
