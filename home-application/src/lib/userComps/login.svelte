@@ -28,7 +28,7 @@
 </script>
 <form class=" ml-4 flex flex-col gap-4 " on:submit|preventDefault={sendToLoginEP}>
 
-<label for="">
+<label for="" class="border border-slate-300 p-4 rounded-xl my-4 shadow-lg">
     <p>Username:</p>
     <input
         bind:value={inputUserName}
@@ -38,7 +38,7 @@
         type="text"
     />
 </label>
-<label for="">
+<label for="" class="border border-slate-300 p-4 rounded-xl my-4 shadow-lg">
     <p>Password:</p>
     <input
     bind:value={inputPassword}
@@ -50,7 +50,7 @@
 </label>
 {#if validated}
     <input
-        class=" transition-all cursor-pointer w-16 h-10 border-slate-200 hover:border-indigo-300 border-solid border-2"
+        class=" border hover:border-green-300  transition duration-500 cursor-pointer px-4 py-2 w-40  border-slate-300 p-4 rounded-xl my-4 shadow-lg"
         type="submit"
         value="Login"
     />
