@@ -13,7 +13,8 @@ export const fetchMons = async() =>{
 				return {
 					name: x.name,
 					id: x.id,
-					img: `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${x.name}.png`
+					img: `https://raw.githubusercontent.com/msikma/pokesprite/master/pokemon-gen8/regular/${x.name}.png`,
+					types: x.type
 				};
 			})
 		}

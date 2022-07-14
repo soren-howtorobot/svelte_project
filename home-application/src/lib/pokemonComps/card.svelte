@@ -1,11 +1,17 @@
 <script>
 
     import { createEventDispatcher } from 'svelte';
+    import { typeToColorHex } from '$lib/commonJS/typeToColor.js';
     const dispatch = createEventDispatcher();
 	export let mon;
+    if(mon.types.length == 1){
+        mon.types = [mon.types[0],mon.types[0]]
+    }
+    const color1 = typeToColorHex(mon.types[0].name);
+    const color2 = typeToColorHex(mon.types[1].name);
     export let rotateAll;
-    import { popStore } from '../../stores/popstore.js';
-    import { teamStoreWriteable } from '../../stores/teamStore.js';
+    import { popStore } from '/src/stores/popstore.js';
+    import { teamStoreWriteable } from '/src/stores/teamStore.js';
     import { createTeam } from '$lib/createObjInstance/team.js';
     
     const addToTeam = (mon) => {
@@ -25,7 +31,7 @@
     
 </script>
 <div class="wrapper relative  aspect-square ">
-    <div on:click={()=>{rotateAll();rotated = !rotated}} class:rotated class=" firstLayer shadow-2xl z-20 absolute top-0 left-0 group hover:bg-blue-200 hover:scale-105 w-full h-full transition ease-in-out cursor-pointer flex flex-col bg-slate-300  rounded-sm items-center border-black border-2 justify-center">
+    <div on:click={()=>{rotateAll();rotated = !rotated}} class:rotated  style:--color1={color1} style:--color2={color2}  class=" gradient_custom firstLayer shadow-2xl z-20 absolute top-0 left-0 group hover:bg-blue-200 hover:scale-105 w-full h-full transition ease-in-out cursor-pointer flex flex-col bg-slate-300  rounded-sm items-center border-black border-2 justify-center">
         <h2 class=" group-hover:text-black">	
             #{mon.id}: <span class=" capitalize">{mon.name}</span>
         </h2>
@@ -46,5 +52,7 @@
     .rotated{
         transform: translateX(-50%);
     }
-    
+    .gradient_custom{
+        background: linear-gradient(130deg, var(--color1) 25%, var(--color2) 75%);
+    }
 </style>

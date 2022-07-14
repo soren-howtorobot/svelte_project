@@ -32,6 +32,13 @@ model Pokemon {
   name       String @db.VarChar(100)
   generation Int?
   teams      Team[]
+  type       Type[]
 
   @@fulltext([name])
+}
+
+model Type {
+  id       Int       @id @default(autoincrement())
+  name     String    @db.VarChar(10)
+  pokemons Pokemon[]
 }

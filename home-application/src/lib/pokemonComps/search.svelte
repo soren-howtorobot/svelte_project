@@ -1,5 +1,5 @@
 <script>
-	import { pokemonStoreWriteable,fetchMons } from './../../stores/pokemonStore.js';
+	import { pokemonStoreWriteable,fetchMons } from '/src/stores/pokemonStore.js';
     
     let searchString = "";
     const searchInDB = async () => {

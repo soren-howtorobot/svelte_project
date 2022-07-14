@@ -1,9 +1,9 @@
 <script>
-	import { pokemonStoreWriteable, fetchMons } from '../stores/pokemonStore.js';
-	import Card from "../structure/pokemon-compontents/card.svelte"
-	import TeamViewer from '../structure/pokemon-compontents/teamComps/teamViewer.svelte';
-	import TeamSelector from '../structure/pokemon-compontents/teamComps/team-selector.svelte';
-	import SearchField from '../structure/pokemon-compontents/search.svelte';
+	import { pokemonStoreWriteable } from '/src/stores/pokemonStore.js';
+	import Card from "$lib/pokemonComps/card.svelte"
+	import TeamViewer from '$lib/teamComps/teamViewer.svelte';
+	import TeamSelector from '$lib/teamComps/team-selector.svelte';
+	import SearchField from '$lib/pokemonComps/search.svelte';
 	
 	const rotateAll = () => {
 		if (!document.querySelector('.firstLayer.rotated')) return;
